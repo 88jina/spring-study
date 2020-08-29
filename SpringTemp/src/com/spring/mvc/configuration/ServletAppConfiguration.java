@@ -6,7 +6,7 @@ import org.springframework.web.servlet.mvc.*;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(value = "com.example",useDefaultFilters = false, 
+@ComponentScan(value = "com.spring.mvc",useDefaultFilters = false, 
 							 includeFilters = @ComponentScan.Filter(Controller.class))
 public class ServletAppConfiguration implements WebMvcConfigurer{
 	@Override
