@@ -14,13 +14,14 @@ public class MailServiceImpl implements MailService {
 	@Autowired
 	private JavaMailSender mailSender;
 	@Override
-	public void sendMail(String userEmail, int authKey) {
+	public void sendMail(String userEmail, String authKey) {
 		try {
 			MailUtils sendMail = new MailUtils(mailSender);
 			sendMail.setSubject("회원가입 인증 메일");
 			sendMail.setText(new StringBuffer().append("<h1>[이메일 인증]</h1>")
 			.append("<p>아래 링크를 클릭하시면 이메일 인증이 완료됩니다.</p>")
-            .append("<a href='http://localhost:8090/register/confirm?")
+            .append("<a href='http://localhost:8090/springRegister/register/confirm?userEmail=")
+            .append(userEmail)
             .append("&authKey=")
             .append(authKey)
             .append("' target='_blank'>이메일 인증 확인 링크</a>")

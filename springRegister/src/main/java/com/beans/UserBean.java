@@ -8,14 +8,20 @@ public class UserBean {
 	
 	@Email
 	private String userEmail;
-	@NotEmpty(message = "비어있으면 안됩니다.")
+	@NotEmpty(message = "비밀번호를 입력해주세요")
 	private String userPassword;
 	private String userAddr;
 	private int userDegree;
 	private int userType;
-	private int authKey;
+	private String authKey;
 	private int authStatus;
 	private int availablePoint;
+	@Override
+	public String toString() {
+		return "UserBean [userId=" + userId + ", userEmail=" + userEmail + ", userPassword=" + userPassword
+				+ ", userAddr=" + userAddr + ", userDegree=" + userDegree + ", userType=" + userType + ", authKey="
+				+ authKey + ", authStatus=" + authStatus + ", availablePoint=" + availablePoint + "]";
+	}
 	public int getUserId() {
 		return userId;
 	}
@@ -52,10 +58,10 @@ public class UserBean {
 	public void setUserType(int userType) {
 		this.userType = userType;
 	}
-	public int getAuthKey() {
+	public String getAuthKey() {
 		return authKey;
 	}
-	public void setAuthKey(int authKey) {
+	public void setAuthKey(String authKey) {
 		this.authKey = authKey;
 	}
 	public int getAuthStatus() {

@@ -7,12 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-   <form action ="login" method="post">
-   email <input type="text" name="userEmail"><br>
-   password<input type="password" name="userPassword"><br>
-   <button type="submit">login</button>
-   </form>
-	
+authorized mail account successfully
+<a href="login.jsp">로그인 바로가기</a>
 </body>
 </html>

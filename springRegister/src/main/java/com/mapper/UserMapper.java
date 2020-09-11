@@ -13,4 +13,7 @@ public interface UserMapper {
 	@Select("SELECT * FROM user WHERE userEmail=#{userEmail}")
 	List<UserBean> isAddedMail(UserBean userBean);
 	
+	@Update("UPDATE user SET authStatus=1, authKey='done' WHERE userEmail=#{userEmail} AND authKey=#{authKey}")
+	public void authorize(UserBean userBean);
+	
 }

@@ -1,5 +1,7 @@
 package com.controller;
 
+import java.util.*;
+
 import javax.validation.*;
 
 import org.springframework.beans.factory.annotation.*;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.*;
 import org.springframework.ui.*;
 import org.springframework.validation.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.*;
 
 import com.beans.*;
 import com.service.*;
@@ -15,7 +18,7 @@ import com.service.*;
 public class HomeController {
 
 	@Autowired
-	TestService testServiceImpl;
+	TestService testService;
 	@Autowired
 	UserService userService;
 	@Autowired
@@ -24,12 +27,11 @@ public class HomeController {
 	@GetMapping("/")
 	public String home() {
 		System.out.println("home");
-		return "register";
+		return "login";
 	}
 
 	@PostMapping("/register")
-	public String register(@Valid UserBean userBean, BindingResult result, Model model) {
-		
+	public String register(@Valid UserBean userBean, BindingResult result, Model model, WebRequest request) {
 
 		if (result.hasErrors()) {
 			String message = result.getAllErrors().get(0).getDefaultMessage();
@@ -37,13 +39,18 @@ public class HomeController {
 			return "Fail";
 		}
 
-		int authKey = testServiceImpl.authKeyMaker();
-		userBean.setAuthKey(authKey);
-		System.out.println("authKey : " + authKey);
-		String userEmail = userBean.getUserEmail();
-		System.out.println("Email : " + userEmail);
-		System.out.println("Password : " + userBean.getUserPassword());
+		String authKey = testService.authKeyMaker();
+		String userEmail =request.getParameter("userEmail");
+		String userPassword =request.getParameter("userPassword"); //뷰에서 데이터 받아서 인스턴스화
 		
+		userBean.setAuthKey(authKey);
+		userBean.setUserEmail(userEmail);
+		userBean.setUserPassword(userPassword); //뷰에서 받아온 데이터를 유저빈에 넣어줌
+		
+		Map<String,String> map = new HashMap<>();
+		map.put("userEmail", userEmail);
+		map.put("authKey",authKey);
+		System.out.println(map); //인증을 위해 맵에 저장
 		
 		userService.addUserInfo(userBean); // db에 저장
 		System.out.println("Saved User Information Successfully");

@@ -8,10 +8,10 @@ import org.springframework.stereotype.*;
 public class TestServiceImpl implements TestService {
 
 	@Override
-	public int authKeyMaker() {
+	public String authKeyMaker() {
 		int authKey = (int)(Math.random()*100000+1);
 		
-		return authKey;
+		return Integer.toString(authKey);
 	}
 
 

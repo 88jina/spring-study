@@ -2,6 +2,6 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <script>
-	alert('${message}')
+	alert('${message}');
 	history.back();
 </script>

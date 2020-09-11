@@ -48,4 +48,11 @@ public class RootConfiguration {
 		factoryBean.setSqlSessionFactory(sqlSessionFactory);
 		return factoryBean;
 	}
+	
+	@Bean
+	public MapperFactoryBean<LoginMapper> loginMapper(SqlSessionFactory sqlSessionFactory) {
+		MapperFactoryBean<LoginMapper> factoryBean = new MapperFactoryBean<LoginMapper>(LoginMapper.class);
+		factoryBean.setSqlSessionFactory(sqlSessionFactory);
+		return factoryBean;
+	}
 }
